@@ -1,0 +1,17 @@
+--Filename: Views
+--Authors: Dominique Le Baud Roy, Jinal Prajapati, Olivia Accimé
+--Description: Creating dynamic and materialized views
+
+DROP VIEW IF EXISTS employee_table; 
+DROP MATERIALIZED VIEW IF EXISTS activity_count;
+
+CREATE VIEW hockey_players AS
+SELECT StudentNumber, NameOfActivity
+FROM ExtracurricularActivities
+WHERE NameOfActivity = 'hockey' AND StudentPosition ='player';
+
+CREATE MATERIALIZED VIEW activity_count AS 
+SELECT StudentNumber, COUNT(ActivityID) AS Activity_count
+FROM ExtracurricularActivities
+GROUP BY StudentNumber
+HAVING COUNT(ActivityID) >= 2;

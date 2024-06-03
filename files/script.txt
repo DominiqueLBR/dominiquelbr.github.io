@@ -1,0 +1,82 @@
+#!/bin/sh -u
+PATH=/bin:/usr/bin ; export PATH
+umask 022
+
+evenodd(){
+        [ $((number % 2)) -eq 0 ]
+}
+
+#Checking that there is a sufficient number of arguments 
+if [ $# -le 0 ]; then
+        echo "$0: Insuficcient number of arguments" >&2
+        exit 1
+fi
+
+#Checking if output subdirectory exists
+if [ -e output ]; then
+        #Checking that subdirectory output has sufficient permissions to be removed
+        if ! rm -rf output 2>/dev/null; then
+                echo "$0: Insufficient permission to remove the directory output" >&2
+                exit 2
+        fi
+fi
+
+#Creating directory output
+if ! mkdir -p output 2>/dev/null; then
+        #Checking that subdirectory output has sufficient permissions to be created
+        echo "$0: Insufficient permission to remove or create the directory output" >&2
+        exit 2
+fi
+#Setting variable X as the first argument
+X=$1
+shift #Shift so that X is not sorted with the other arguments
+
+#Checking if X is a valid number
+if [ $X -le 0 ]; then
+    echo "$0:Error: X must be an integer greater than zero" >&2
+    exit 3
+fi
+
+#Start of while loop to sort arguments
+while [ $# -gt 0 ] ; do
+        number=$1 #The number is the current argument being compared for sorting
+
+        #If the number is less than X divided by 2
+        if [ "$number" -lt $(($X / 2)) ]; then
+                if evenodd; then
+                        echo "$number" >> output/sect1_even.txt
+                else
+                        echo "$number" >> output/sect1_odd.txt
+                fi
+        fi
+
+        #If the number is greater than X divided by 2 and less than X
+        if [ "$number" -ge $(($X / 2)) -a "$number" -lt $X ]; then
+                if evenodd; then
+                        echo "$number" >> output/sect2_even.txt
+                else
+                        echo "$number" >> output/sect2_odd.txt
+                fi
+fi
+
+        #If the number is greater than X multiplied by 2 and less than X multiplied by 3
+        if [ "$number" -ge $((2 * $X)) -a "$number" -lt $((3 * $X)) ]; then
+                if evenodd; then
+                        echo "$number" >> output/sect3_even.txt
+                else
+                        echo "$number" >> output/sect3_odd.txt
+                fi
+        fi
+
+        #If the number is greater than X multiplied by 3
+        if [ "$number" -ge $((3 * $X)) ]; then
+                if evenodd; then
+                        echo "$number" >> output/sect4_even.txt
+                else
+                        echo "$number" >> output/sect4_odd.txt
+                fi
+        fi
+
+        shift
+
+done

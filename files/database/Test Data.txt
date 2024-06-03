@@ -1,0 +1,72 @@
+--Filename: Test Data
+--Authors: Dominique Le Baud Roy, Jinal Prajapati, Olivia Accimé
+--Description: Inserting data into the tables
+
+
+
+INSERT INTO Student (StudentNumber, StudentFirstName, StudentLastName, Address, DateOfBirth, Gender, AcademicYear, Enrollment, GraduationYear)
+VALUES
+  (1876395,'Chava','Davis','Ap #519-6254 Nisi. Rd.', 'Jan 23, 2008','male',9,'Sep 19, 2023','June 15, 2027'),
+  (9873463,'Brenden','Maldonado','Ap #778-139 Non Street','May 26, 2010','female',10,'Jan 29, 2024','June 15, 2026'),
+  (9876394,'Hedley','Galloway','246-9224 Cubilia Road','Aug 7, 2009','female',12,'Jul 22, 2023','June 15, 2026'),
+  (6987498,'Phoebe','Whitehead','Ap #761-9379 Placerat, Av.','Jul 6, 2009','male',9,'Dec 2, 2022','June 15, 2026'),
+  (5887942,'Kirestin','Eaton','367-5060 Blandit St.','Feb 3, 2010','male',12,'Mar 15, 2023','June 15, 2025');
+  
+  
+ INSERT INTO Employee (EmployeeNumber, EmployeePosition, HomeroomLocation)
+ VALUES
+ 	(98791, 'Teacher','C144'),
+	(98764, 'Counsellor','A102'),
+	(98452, 'Teacher','B206'),
+	(98735, 'Teacher','A244'),
+	(98883, 'Teacher','B144');
+	
+INSERT INTO LegalGuardian (PhoneNumber, Email, LegalGuardianFirstName, LegalGuardianLastName, LegalGuardianDateOfBirth, Address)
+VALUES
+	('867655989','jadaSmith@gmail.com','Jada','Smith','December 5 1970', '5519 Cavalier '),
+    ('789647468','alenbae@gmail.com','Alen','bae','September 6 1972','6578 Bordeaux '),
+	('926347484','gilbertblue@gmail.com','Gilbert','Blue','June 4 1968','2121 Bluesea'),
+	('923678458','nancymay@gmail.com','Nancy','May','January 3 1965', '2414 Voyager '),
+	('935274553','paulstan@gmail.com','Paul','Stanford','March 5 1976', '1010 Willow');
+	
+
+INSERT INTO Course (CourseID, EmployeeNumber, StudentNumber, CourseLocation)
+VALUES 
+	('CST8116',98791, 1876395,'C144'),
+	('CST8215',98452, 9873463,'A102'),
+	('CST8300',98452, 9876394, 'B206'),
+	('CST8118',98735, 6987498,'B144'),
+	('MAT8001C',98883, 5887942, 'A244');
+	
+INSERT INTO Grade(CourseID, StudentNumber, OverallGPA, GPAPerAcademicYear,GPAForGradingPeriod)
+VALUES
+('CST8116', 1876395, '2.9', '3.0', '2.7'),
+('CST8215', 9873463, '2.8', '3.2', '2.9'),
+('CST8300', 9876394, '3.2', '2.7', '3.4'),
+('CST8118', 6987498, '3.3', '2.9', '3.0'),
+('MAT8001C', 5887942, '3.1', '3.0', '3.5');
+	
+INSERT INTO ExtracurricularActivities (ActivityID, StudentNumber, NameOfActivity, StudentPosition, DateofActivity  )
+VALUES
+	(001, 1876395,'soccer', 'captain','June 20 2022'),
+	(002, 9873463,'hockey', 'player','January 12 2021'),
+	(003, 9876394,'robotic', 'member','September 20 2021'),
+	(004, 6987498,'hockey', 'player','October 1 2022'),
+	(005, 5887942,'hockey', 'player','September 5 2021'),
+	(006, 9876394,'hockey', 'member','September 20 2021');
+	
+INSERT INTO PostSecondaryPlan (ApplicationID, PostSecondaryApplication, PostSecondaryApplicationDate, PostSecondaryApplicationStatus, StudentNumber)
+VALUES
+	(01, 'Ottawa University', '23, March 2023','pending', 1876395),
+	(02, 'Algonquin College', '15, April 2023','accpeted', 9873463),
+	(03, 'Seneca College', '15, April 2023','accpeted', 9876394),
+	(04, 'Algonquin College', '27, March 2023', 'pending',6987498),
+	(05, 'Seneca College', '01, May 2023','rejected', 5887942);
+	
+INSERT INTO Incident(IncidentNumber, StudentNumber, IncidentType, IncidentDate, DisciplinaryAction)
+VALUES
+	(22463, 1876395, 'Cheating','November 16, 2023', 'Detention'),
+	(45634, 6987498, 'SkippingClass','May 27, 2023', 'Suspension'),
+	(87472, 9876394, 'Plagiarism','March 05, 2023', 'Suspension'),
+	(54632, 6987498, 'Cheating','August 25, 2023', 'Detention'),
+	(34256, 6987498, 'Cheating','September 25, 2023', 'Detention');

@@ -1,0 +1,64 @@
+--Filename: Query
+--Authors: Dominique Le Baud Roy, Jinal Prajapati, Olivia Accimé
+--Description: Creating the required queries 
+
+-- Query 1
+SELECT *
+FROM student;
+
+-- Query 2
+SELECT StudentNumber, StudentFirstName, StudentLastName, DateOfBirth
+FROM student;
+
+-- Query 3
+SELECT StudentNumber, Gender, AcademicYear
+FROM student
+WHERE Gender = 'female';
+
+-- Query 4
+SELECT StudentNumber, NameOfActivity
+FROM ExtracurricularActivities
+WHERE NameOfActivity = 'hockey' AND StudentPosition ='player';
+
+
+--Query 5
+SELECT *
+FROM Course
+JOIN Employee ON Course.EmployeeNumber = Employee.EmployeeNumber;
+
+--Query 6
+SELECT Student.StudentFirstName, PostSecondaryPlan.PostSecondaryApplication, Grade.OverallGPA
+FROM Student
+JOIN PostSecondaryPlan ON PostSecondaryPlan.StudentNumber = Student.StudentNumber
+JOIN Grade ON Grade.StudentNumber = Student.StudentNumber;
+
+
+-- Query 7
+SELECT COUNT(*) AS Student_count
+FROM Student;
+
+--Query 8
+SELECT AcademicYear, COUNT (StudentFirstName) AS TotalStudents
+FROM Student
+GROUP BY AcademicYear;
+
+-- Query 9
+SELECT StudentNumber, COUNT(ActivityID) AS Activity_count
+FROM ExtracurricularActivities
+GROUP BY StudentNumber
+HAVING COUNT(ActivityID) >= 2;
+
+--Query 10
+SELECT StudentNumber, OverallGPA
+FROM Grade
+WHERE StudentNumber IN (SELECT StudentNumber
+					  FROM Student
+					  WHERE StudentFirstName = 'Phoebe');
+					  
+					  
+--Query 11
+SELECT  Student.StudentFirstName, COUNT ( Incident.IncidentType)
+FROM Student
+Join Incident ON Student.StudentNumber = Incident.StudentNumber
+GROUP BY Incident.IncidentType, Student.StudentFirstName
+ORDER BY Student.StudentFirstName DESC;

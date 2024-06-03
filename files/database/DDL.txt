@@ -1,0 +1,73 @@
+--Filename: DDL for High School
+--Authors: Dominique Le Baud Roy, Jinal Prajapati, Olivia Accimé
+--Description: Tables created for the high school's database
+
+DROP TABLE IF EXISTS Student, Employee, LegalGuardian, Grade, Course, ExtracurricularActivities, PostSecondaryPlan, Incident CASCADE;
+
+CREATE TABLE Student (
+	StudentNumber INT PRIMARY KEY NOT NULL,
+	StudentFirstName VARCHAR(45) NOT NULL,
+	StudentLastName VARCHAR(45) NOT NULL,
+	Address VARCHAR(45) NOT NULL,
+	DateOfBirth DATE NOT NULL,
+	Gender CHAR(25) NOT NULL,
+	AcademicYear INT NOT NULL,
+	Enrollment DATE NOT NULL,
+	GraduationYear DATE NOT NULL
+	);
+	
+CREATE TABLE Employee (
+	EmployeeNumber INT PRIMARY KEY NOT NULL,
+	EmployeePosition VARCHAR(20),
+	HomeroomLocation Varchar(20) NULL
+	);
+	
+CREATE TABLE LegalGuardian (
+	PhoneNumber INT,
+	Email VARCHAR(30),
+	LegalGuardianFirstName VARCHAR(20),
+	LegalGuardianLastName VARCHAR(20),
+	LegalGuardianDateOfBirth VARCHAR(20),
+	Address VARCHAR(20),
+	PRIMARY KEY (PhoneNumber, Email)
+	);
+
+	
+CREATE TABLE Course (
+	CourseID VARCHAR(8) PRIMARY KEY NOT NULL,
+	EmployeeNumber INT REFERENCES Employee(EmployeeNumber),
+	StudentNumber INT REFERENCES Student(StudentNumber),
+	CourseLocation VARCHAR(20)
+	);
+	
+CREATE TABLE Grade(
+	CourseID VARCHAR(8)REFERENCES Course (CourseID),
+	OverallGPA VARCHAR(3),
+	GPAPerAcademicYear VARCHAR(3),
+	GPAForGradingPeriod VARCHAR(3),
+	StudentNumber INT REFERENCES Student(StudentNumber)
+	);
+	
+CREATE TABLE ExtracurricularActivities (
+	ActivityID INT PRIMARY KEY NOT NULL,
+	StudentNumber INT REFERENCES Student(StudentNumber),
+	NameOfActivity VARCHAR(25),
+	StudentPosition VARCHAR(25),
+	DateofActivity DATE
+	);
+	
+CREATE TABLE PostSecondaryPlan (
+	ApplicationID INT PRIMARY KEY,
+	PostSecondaryApplication VARCHAR(45),
+	PostSecondaryApplicationDate DATE,
+	PostSecondaryApplicationStatus VARCHAR (45) NULL,
+	StudentNumber INT REFERENCES Student(StudentNUmber)
+	);
+	
+CREATE TABLE Incident (
+	IncidentNumber INT PRIMARY KEY,
+	StudentNumber INT REFERENCES Student(StudentNUmber),
+	IncidentType VARCHAR(50),
+	IncidentDate DATE,
+	DisciplinaryAction TEXT NULL
+	);
